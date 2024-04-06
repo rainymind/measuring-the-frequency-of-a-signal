@@ -1,0 +1,19 @@
+% Define the signal and FFT settings
+Fs = 1000;            % Sampling frequency (Hz)
+t = 0:1/Fs:1-1/Fs;    % Time axis
+L = length(t);        % Length of the signal
+f = 50;               % Signal frequency (Hz)
+x = sin(2*pi*f*t);    % Generate the signal
+
+% Perform FFT
+Y = fft(x);
+P2 = abs(Y/L);
+P1 = P2(1:L/2+1);
+P1(2:end-1) = 2*P1(2:end-1);
+f = Fs*(0:(L/2))/L;
+
+% Plot the frequency spectrum
+plot(f,P1) 
+title('FFT of the Signal')
+xlabel('Frequency (Hz)')
+ylabel('|P1(f)|')
